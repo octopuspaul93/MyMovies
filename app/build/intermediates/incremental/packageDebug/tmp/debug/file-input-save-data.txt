@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon Nov 04 09:18:48 IST 2019
+0.baseType=DIRECTORY
+0.base=C\:\\My Files\\ALL FOR JAVA\\My Android Projects\\Final Project\\MyMovies\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.path=classes.dex
+0.set=DEX
+count=1
