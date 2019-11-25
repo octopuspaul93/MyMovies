@@ -5,6 +5,8 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -37,6 +39,8 @@ public class FavouriteActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == android.R.id.home)
+            NavUtils.navigateUpFromSameTask(this);
         switch (id) {
             case R.id.itemMain:
                 Intent intent = new Intent(this, MainActivity.class);
@@ -54,6 +58,11 @@ public class FavouriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null)
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
         recyclerViewFavouriteMovies = findViewById(R.id.recyclerViewFavouriteMovies);
         recyclerViewFavouriteMovies.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new MovieAdapter();
@@ -80,4 +89,5 @@ public class FavouriteActivity extends AppCompatActivity {
             }
         });
     }
+
 }
