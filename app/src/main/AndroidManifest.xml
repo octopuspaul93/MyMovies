@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sumin.mymovies">
+    package="com.pavel_nikolaev.mymovies">
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name="com.pavel_nikolaev.mymovies.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,12 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".FavouriteActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name="com.pavel_nikolaev.mymovies.DetailActivity" />
+        <activity android:name="com.pavel_nikolaev.mymovies.FavouriteActivity"
+            android:parentActivityName="com.pavel_nikolaev.mymovies.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value="com.pavel_nikolaev.mymovies.MainActivity"/>
         </activity>
     </application>
 

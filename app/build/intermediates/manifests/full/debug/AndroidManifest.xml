@@ -20,15 +20,23 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.sumin.mymovies.MainActivity" >
+        <activity
+            android:name="com.pavel_nikolaev.mymovies.MainActivity"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sumin.mymovies.DetailActivity" />
-        <activity android:name="com.sumin.mymovies.FavouriteActivity" />
+        <activity android:name="com.pavel_nikolaev.mymovies.DetailActivity" />
+        <activity
+            android:name="com.pavel_nikolaev.mymovies.FavouriteActivity"
+            android:parentActivityName="com.pavel_nikolaev.mymovies.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pavel_nikolaev.mymovies.MainActivity" />
+        </activity>
 
         <provider
             android:name="com.squareup.picasso.PicassoProvider"
