@@ -11,7 +11,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class JSONUtils {
+    /**Здесь преобразуем JSON в объект*/
 
+    //Это все ключи, по которым мы будем получать значения из объекта json
     private static final String KEY_RESULTS = "results";
 
     //Для отзывов

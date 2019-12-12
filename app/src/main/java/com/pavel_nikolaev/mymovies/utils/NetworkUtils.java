@@ -21,7 +21,9 @@ import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 public class NetworkUtils {
+    /**В этом классе происходит работа, свзанная с сетью*/
 
+    //Сайт фильмов с бесплатным API
     private static final String BASE_URL = "https://api.themoviedb.org/3/discover/movie";
     private static final String BASE_URL_VIDEOS = "https://api.themoviedb.org/3/movie/%s/videos";
     private static final String BASE_URL_REVIEWS = "https://api.themoviedb.org/3/movie/%s/reviews";
@@ -37,8 +39,10 @@ public class NetworkUtils {
     private static final String SORT_BY_TOP_RATED = "vote_average.desc";
     private static final String MIN_VOTE_COUNT_VALUE = "1000";
 
+    //Переменные для выбора сортировки по...
     public static final int POPULARITY = 0;
     public static final int TOP_RATED = 1;
+
 
     public static URL buildURLToVideos(int id, String lang) {
         Uri uri = Uri.parse(String.format(BASE_URL_VIDEOS, id)).buildUpon()
@@ -64,6 +68,7 @@ public class NetworkUtils {
         return null;
     }
 
+    //Метод для формирования запроса
     public static URL buildURL(int sortBy, int page, String lang) {
         URL result = null;
         String methodOfSort;
@@ -72,6 +77,7 @@ public class NetworkUtils {
         } else {
             methodOfSort = SORT_BY_TOP_RATED;
         }
+        //Прикрепляем параметры для запроса
         Uri uri = Uri.parse(BASE_URL).buildUpon()
                 .appendQueryParameter(PARAMS_API_KEY, API_KEY)
                 .appendQueryParameter(PARAMS_LANGUAGE, lang)
@@ -92,9 +98,7 @@ public class NetworkUtils {
         URL url = buildURLToVideos(id, lang);
         try {
             result = new JSONLoadTask().execute(url).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return result;
@@ -105,22 +109,19 @@ public class NetworkUtils {
         URL url = buildURLToReviews(id, lang);
         try {
             result = new JSONLoadTask().execute(url).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    //Метод, который получает объет json из сети
     public static JSONObject getJSONFromNetwork(int sortBy, int page, String lang) {
         JSONObject result = null;
         URL url = buildURL(sortBy, page, lang);
         try {
             result = new JSONLoadTask().execute(url).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return result;
@@ -196,6 +197,7 @@ public class NetworkUtils {
         }
     }
 
+    //метод, который загружает данные из интернета. Принимает URL, возвращает json объект
     private static class JSONLoadTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... urls) {
@@ -216,9 +218,7 @@ public class NetworkUtils {
                     line = reader.readLine();
                 }
                 result = new JSONObject(builder.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             } finally {
                 if (connection != null) {
