@@ -40,6 +40,7 @@ public class JSONUtils {
     public static final String SMALL_POSTER_SIZE = "w185";
     public static final String BIG_POSTER_SIZE = "w780";
 
+    //М
     public static ArrayList<Review> getReviewsFromJSON(JSONObject jsonObject) {
         ArrayList<Review> result = new ArrayList<>();
         if (jsonObject == null) {
@@ -80,6 +81,7 @@ public class JSONUtils {
         return  result;
     }
 
+    //Метод, который получает список с фильмами из объека json
     public static ArrayList<Movie> getMoviesFromJSON(JSONObject jsonObject) {
         ArrayList<Movie> result = new ArrayList<>();
         if (jsonObject == null) {

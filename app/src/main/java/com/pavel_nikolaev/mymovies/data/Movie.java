@@ -4,8 +4,10 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
+//Добавляем эту аннотацию, чтобы андроид понял, что этот класс будет использован для БД
 @Entity(tableName = "movies")
 public class Movie {
+    //Первичный ключ - автоматическая генерация. Чтобы фильмы подгружались из БД так, как они были добавлены
     @PrimaryKey(autoGenerate = true)
     private int uniqueId;
     private int id;

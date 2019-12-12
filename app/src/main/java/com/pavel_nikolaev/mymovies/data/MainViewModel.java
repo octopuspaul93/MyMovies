@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+//ViewModel - класс, позволяющий делать запросы в другом программном потоке.
 public class MainViewModel extends AndroidViewModel {
 
     private static MovieDatabase database;
@@ -25,9 +26,7 @@ public class MainViewModel extends AndroidViewModel {
     public Movie getMovieById(int id) {
         try {
             return new GetMovieTask().execute(id).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
@@ -36,9 +35,7 @@ public class MainViewModel extends AndroidViewModel {
     public FavouriteMovie getFavouriteMovieById(int id) {
         try {
             return new GetFavouriteMovieTask().execute(id).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
@@ -72,6 +69,7 @@ public class MainViewModel extends AndroidViewModel {
         new DeleteFavouriteTask().execute(movie);
     }
 
+    //AsyncTask предлагает простой и удобный механизм для перемещения трудоёмких операций в фоновый поток
     private static class DeleteFavouriteTask extends AsyncTask<FavouriteMovie, Void, Void> {
         @Override
         protected Void doInBackground(FavouriteMovie... movies) {

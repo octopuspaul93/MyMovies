@@ -14,6 +14,7 @@ import com.pavel_nikolaev.mymovies.data.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
+//Адаптер для рейсайклера
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private List<Movie> movies;
@@ -24,10 +25,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         movies = new ArrayList<>();
     }
 
+    //Интерфейс-слушатейль нажатия на постер
     public interface OnPosterClickListener {
         void onPosterClick(int position);
     }
 
+    //Интрефейс-слушатель, если долши до конца загруженных постеров
     public interface OnReachEndListener {
         void onReachEnd();
     }
@@ -43,16 +46,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        //Передаем наш макет для фильма
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.movie_item, viewGroup, false);
         return new MovieViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
+        //устанавливаем значение фильмов, при которых должна произойти дозагрузка фильмов
         if (movies.size() >= 20 && i > movies.size() - 4 && onReachEndListener != null) {
             onReachEndListener.onReachEnd();
         }
         Movie movie = movies.get(i);
+        //Библиотека Пикассо упрощает работу с изо и кэширует изо. Добавили депенденси в билд грэдл
         Picasso.get().load(movie.getPosterPath()).into(movieViewHolder.imageViewSmallPoster);
     }
 
@@ -61,6 +67,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return movies.size();
     }
 
+    //Вложенный класс
     class MovieViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageViewSmallPoster;

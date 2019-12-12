@@ -35,9 +35,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+//MainActivity следит за состоянием загрузки данных. Интерфейс + данные, которые мы должны получить из загрузчика
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<JSONObject> {
 
+    //Наша главная активность
     private Switch switchSort;
+    //Создан доп. макет для ресайклера - movie.item - макет из картинки
     private RecyclerView recyclerViewPosters;
     private MovieAdapter movieAdapter;
     private TextView textViewTopRated;
@@ -46,7 +49,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private MainViewModel viewModel;
 
-    private static final int LOADER_ID = 133;
+    //Случайное число - уникальный идентификатор загрузчика
+    private static final int LOADER_ID = 228;
+    //Мэнеджер загрузок
     private LoaderManager loaderManager;
 
     private static int page = 1;
@@ -78,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return super.onOptionsItemSelected(item);
     }
 
+    //Получаем количество колонок в зависимости от ширины жкрана устройства
     private int getColumnCount() {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -126,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 }
             }
         });
+        //Каждый раз, когда данные будут меняться, мы их ставим у адаптора
         LiveData<List<Movie>> moviesFromLiveData = viewModel.getMovies();
         moviesFromLiveData.observe(this, new Observer<List<Movie>>() {
             @Override
@@ -160,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         downloadData(methodOfSort, page);
     }
 
+    //Метод загрузки данных
     private void downloadData(int methodOfSort, int page) {
         URL url = NetworkUtils.buildURL(methodOfSort, page, lang);
         Bundle bundle = new Bundle();

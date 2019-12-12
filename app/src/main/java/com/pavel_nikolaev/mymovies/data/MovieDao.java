@@ -8,6 +8,7 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+//Интерфейс Data Access Object - механизм работы нашей БД
 @Dao
 public interface MovieDao {
     @Query("SELECT * FROM movies")

@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+//Наша БД  наследует RoomDatabase - удобная обертка для работы с базой данных SQLite
 @Database(entities = {Movie.class, FavouriteMovie.class}, version = 4, exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {
 

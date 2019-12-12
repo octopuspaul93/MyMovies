@@ -127,8 +127,10 @@ public class NetworkUtils {
         return result;
     }
 
+    //Загрузчик. Если долго загружаются данные, а мы перевернули экран, то данные загружаются заново.
     public static class JSONLoader extends AsyncTaskLoader<JSONObject> {
 
+        //Объект сохрания состояния активности. URL тут мы передаем не напрямую, а через объект Bundle
         private Bundle bundle;
         private OnStartLoadingListener onStartLoadingListener;
 
@@ -151,6 +153,7 @@ public class NetworkUtils {
             if (onStartLoadingListener != null) {
                 onStartLoadingListener.onStartLoading();
             }
+            //Продолжает загрузку
             forceLoad();
         }
 
@@ -184,9 +187,7 @@ public class NetworkUtils {
                     line = reader.readLine();
                 }
                 result = new JSONObject(builder.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             } finally {
                 if (connection != null) {
